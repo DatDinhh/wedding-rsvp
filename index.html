@@ -1,312 +1,824 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dat & Huong — Wedding RSVP</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dat & Huong — Wedding</title>
+  <meta name="description" content="Wedding RSVP for Dat Hoang Bao Dinh & Huong Thi Thu Nguyen — August 1st, 2026" />
 
-<style>
-:root{
-  --burgundy:#7A1F2B;
-  --pink:#F4C2CC;
-  --white:#FFF9F9;
-  --ink:#3b1f23;
-  --muted:#7a4a50;
-  --line:#e6cfd3;
-}
+  <style>
+    :root{
+      /* Burgundy / Baby Pink / White */
+      --burgundy:#7A1F2B;
+      --burgundy-2:#5F1620;
+      --pink:#F4C2CC;
+      --pink-2:#FBE6EA;
+      --white:#FFF9F9;
 
-*{box-sizing:border-box}
+      --ink:#2A1417;
+      --muted:#6F4A50;
+      --line:rgba(122,31,43,.18);
 
-body{
-  margin:0;
-  font-family: "Georgia", "Times New Roman", serif;
-  background:
-    radial-gradient(1000px 600px at top, #fbe6ea, transparent),
-    var(--white);
-  color:var(--ink);
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
+      --card:rgba(255,255,255,.92);
+      --shadow: 0 22px 70px rgba(0,0,0,.15);
+      --radius: 18px;
+    }
 
-.card{
-  width:min(760px,100%);
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 20px 60px rgba(0,0,0,.15);
-  overflow:hidden;
-  border:3px solid var(--pink);
-}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1100px 700px at 12% 6%, var(--pink-2), transparent 60%),
+        radial-gradient(900px 650px at 88% 18%, #fff, transparent 58%),
+        var(--white);
+      min-height:100vh;
+    }
 
-header{
-  background:linear-gradient(135deg,var(--burgundy),#5f1620);
-  color:#fff;
-  text-align:center;
-  padding:34px 22px;
-}
+    /* Layout */
+    .container{width:min(1060px, 100%); margin:0 auto; padding:0 18px;}
+    .section{padding:64px 0;}
+    @media (max-width: 720px){ .section{padding:50px 0;} }
 
-header h1{
-  margin:0;
-  font-size:30px;
-  letter-spacing:.4px;
-  line-height:1.2;
-}
+    /* Top nav */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(255,249,249,.72);
+      border-bottom:1px solid rgba(122,31,43,.12);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:14px 0;
+    }
+    .brand{
+      display:flex; flex-direction:column; line-height:1.05;
+      font-weight:700; letter-spacing:.3px;
+      color:var(--burgundy);
+    }
+    .brand small{font-weight:600; color:var(--muted); letter-spacing:.2px}
+    .links{display:flex; gap:14px; flex-wrap:wrap; align-items:center; justify-content:flex-end;}
+    .links a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+    }
+    .links a:hover{
+      color:var(--burgundy);
+      border-color: rgba(122,31,43,.18);
+      background: rgba(244,194,204,.22);
+    }
+    .cta{
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-2));
+      color:#fff !important;
+      border:1px solid rgba(255,255,255,.16) !important;
+      box-shadow: 0 10px 26px rgba(122,31,43,.22);
+    }
+    .cta:hover{opacity:.92}
 
-header p{
-  margin:12px 0 0;
-  font-size:15px;
-  opacity:.95;
-  line-height:1.45;
-}
+    /* Hero */
+    .hero{
+      padding:56px 0 28px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){ .heroGrid{grid-template-columns:1fr; } }
 
-main{
-  padding:28px 26px 30px;
-}
+    .heroCard{
+      background: linear-gradient(135deg, rgba(122,31,43,.96), rgba(95,22,32,.96));
+      color:#fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      padding:28px 26px;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-40px -60px auto auto;
+      width:280px; height:280px;
+      background: radial-gradient(circle at 30% 30%, rgba(244,194,204,.65), transparent 62%);
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+    .names{
+      font-size:38px;
+      line-height:1.05;
+      margin:0;
+      letter-spacing:.4px;
+    }
+    @media (max-width: 520px){ .names{font-size:32px;} }
+    .subline{
+      margin:10px 0 0;
+      font-size:15px;
+      opacity:.94;
+      letter-spacing:.2px;
+    }
+    .pillRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:18px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      color:#fff;
+      font-size:13px;
+      font-weight:600;
+    }
 
-.label{
-  display:block;
-  font-size:13px;
-  margin:0 0 6px;
-  color:var(--muted);
-}
+    /* Countdown card */
+    .sideCard{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border:1px solid rgba(122,31,43,.12);
+      padding:18px 18px 16px;
+    }
+    .sideTitle{
+      margin:2px 0 10px;
+      font-size:16px;
+      color:var(--burgundy);
+      letter-spacing:.2px;
+    }
+    .countGrid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+    }
+    .countBox{
+      border:1px solid rgba(122,31,43,.14);
+      background: rgba(244,194,204,.18);
+      border-radius: 14px;
+      padding:12px 10px;
+      text-align:center;
+    }
+    .countNum{
+      font-size:22px;
+      font-weight:800;
+      color:var(--burgundy);
+      line-height:1;
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .countLbl{
+      margin:6px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+      letter-spacing:.2px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .hint{
+      margin:12px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
 
-input,select,textarea{
-  width:100%;
-  padding:12px 12px;
-  border-radius:12px;
-  border:1px solid var(--line);
-  background:#fff;
-  font-family:inherit;
-  font-size:15px;
-  color:var(--ink);
-}
+    /* Section headings */
+    .kicker{
+      color:var(--muted);
+      font-weight:800;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-size:12px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    h2{
+      margin:10px 0 10px;
+      font-size:30px;
+      color:var(--burgundy);
+      letter-spacing:.2px;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+      max-width: 70ch;
+    }
 
-input::placeholder, textarea::placeholder{color:#b08a90}
+    /* Cards grid */
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+    @media (max-width: 820px){ .grid2{grid-template-columns:1fr;} }
 
-input:focus,select:focus,textarea:focus{
-  outline:none;
-  border-color:var(--burgundy);
-  box-shadow:0 0 0 2px rgba(122,31,43,.15);
-}
+    .card{
+      background: var(--card);
+      border:1px solid rgba(122,31,43,.12);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 40px rgba(0,0,0,.10);
+      padding:18px;
+    }
+    .row{
+      display:flex; gap:10px; align-items:flex-start;
+    }
+    .icon{
+      width:40px; height:40px;
+      border-radius: 14px;
+      background: rgba(244,194,204,.22);
+      border:1px solid rgba(122,31,43,.12);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--burgundy);
+      font-weight:900;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      flex: 0 0 auto;
+    }
+    .card h3{
+      margin:2px 0 6px;
+      font-size:18px;
+      color:var(--burgundy);
+    }
+    .meta{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    .btn{
+      display:inline-flex;
+      align-items:center; justify-content:center;
+      padding:11px 12px;
+      border-radius: 12px;
+      text-decoration:none;
+      font-weight:800;
+      font-size:14px;
+      border:1px solid rgba(122,31,43,.14);
+      background: rgba(244,194,204,.18);
+      color: var(--burgundy);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-2));
+      color:#fff;
+      border-color: rgba(255,255,255,.14);
+    }
+    .btn:hover{opacity:.93}
 
-textarea{min-height:110px; resize:vertical}
+    /* RSVP form */
+    form{margin-top:16px}
+    .formGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 720px){ .formGrid{grid-template-columns:1fr;} }
+    label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+      margin:0 0 6px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(122,31,43,.16);
+      background: #fff;
+      color:var(--ink);
+      font-size:15px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(122,31,43,.55);
+      box-shadow: 0 0 0 3px rgba(122,31,43,.12);
+    }
+    textarea{min-height:120px; resize:vertical}
+    .hidden{display:none !important}
+    .submitBtn{
+      margin-top:14px;
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--burgundy), var(--burgundy-2));
+      color:#fff;
+      font-weight:900;
+      font-size:16px;
+      cursor:pointer;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      box-shadow: 0 16px 36px rgba(122,31,43,.22);
+    }
+    .submitBtn:disabled{opacity:.6; cursor:not-allowed}
+    .toast{
+      margin-top:12px;
+      padding:12px;
+      border-radius: 14px;
+      border:1px solid rgba(122,31,43,.14);
+      background: rgba(244,194,204,.16);
+      color:var(--muted);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:14px;
+      text-align:center;
+    }
+    .toast.ok{background:#e9f6ef; border-color:#bfe7d2; color:#1e6b47}
+    .toast.err{background:#fdecec; border-color:#f2bcbc; color:#8b1e2a}
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
+    /* Gallery */
+    .galleryGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    @media (max-width: 900px){ .galleryGrid{grid-template-columns: repeat(2,1fr);} }
+    @media (max-width: 520px){ .galleryGrid{grid-template-columns:1fr;} }
 
-@media(max-width:640px){
-  .grid{grid-template-columns:1fr}
-}
+    .phCard{
+      border-radius: var(--radius);
+      border:1px dashed rgba(122,31,43,.22);
+      background: rgba(244,194,204,.14);
+      padding:16px;
+    }
+    .phTitle{
+      margin:0 0 6px;
+      font-weight:900;
+      color:var(--burgundy);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    .phText{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
 
-.section{margin-top:16px}
-
-.hidden{display:none !important}
-
-button{
-  margin-top:22px;
-  width:100%;
-  padding:14px;
-  font-size:16px;
-  border-radius:14px;
-  border:none;
-  background:var(--burgundy);
-  color:#fff;
-  font-family:inherit;
-  font-weight:600;
-  cursor:pointer;
-}
-
-button:disabled{opacity:.6; cursor:not-allowed}
-
-.fine{
-  margin-top:14px;
-  font-size:13px;
-  color:var(--muted);
-  text-align:center;
-  line-height:1.5;
-}
-
-.toast{
-  margin-top:16px;
-  padding:12px 12px;
-  border-radius:12px;
-  font-size:14px;
-  text-align:center;
-  border:1px solid var(--line);
-}
-
-.toast.hidden{display:none}
-
-.toast.ok{background:#e9f6ef; border-color:#bfe7d2; color:#1e6b47}
-.toast.err{background:#fdecec; border-color:#f2bcbc; color:#8b1e2a}
-
-hr{
-  border:0;
-  border-top:1px solid #f1dde1;
-  margin:18px 0 0;
-}
-</style>
+    /* Footer */
+    footer{
+      padding:28px 0 46px;
+      border-top:1px solid rgba(122,31,43,.12);
+      background: rgba(255,255,255,.55);
+    }
+    .foot{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center;
+      color:var(--muted);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size:13px;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="card">
-    <header>
-      <h1>
-        Dat Hoang Bao Dinh<br>
-        &amp;<br>
-        Huong Thi Thu Nguyen
-      </h1>
-      <p>
-        Request the honor of your presence<br>
-        <strong>August 1st, 2026</strong>
-      </p>
-    </header>
 
-    <main>
-      <form id="rsvpForm" novalidate>
-
-        <div class="grid">
-          <div>
-            <label class="label" for="name">Full Name *</label>
-            <input id="name" name="name" required autocomplete="name" placeholder="Jane Doe">
-          </div>
-          <div>
-            <label class="label" for="contact">Email or Phone</label>
-            <input id="contact" name="contact" autocomplete="email" placeholder="jane@email.com or (555) 555-5555">
-          </div>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          Dat & Huong
+          <small id="navDate">August 1, 2026</small>
         </div>
 
-        <div class="section">
-          <label class="label" for="status">Will you be attending? *</label>
-          <select id="status" name="status" required>
-            <option value="" disabled selected>Select one</option>
-            <option value="Attending">Attending</option>
-            <option value="Not attending">Not attending</option>
-          </select>
+        <div class="links">
+          <a href="#details">Details</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#rsvp" class="cta">RSVP</a>
+          <a href="#photos">Photos</a>
         </div>
-
-        <!-- Attending-only details -->
-        <div id="attendingBlock" class="section hidden" aria-live="polite">
-          <div class="grid">
-            <div>
-              <label class="label" for="guests">Number of People Attending *</label>
-              <select id="guests" name="guests">
-                <option value="" disabled selected>Select number</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-            <div>
-              <label class="label" for="meal">Dietary Restrictions</label>
-              <input id="meal" name="meal" placeholder="Vegetarian, allergies, etc.">
-            </div>
-          </div>
-
-          <div class="section">
-            <label class="label" for="note">Message for the Couple</label>
-            <textarea id="note" name="note" placeholder="Anything you'd like us to know?"></textarea>
-          </div>
-        </div>
-
-        <button id="submitBtn" type="submit">Submit RSVP</button>
-
-        <div id="toast" class="toast hidden"></div>
-
-        <hr>
-
-        <div class="fine">
-          Kindly reply by <strong>July 1st, 2026</strong>.
-          <br>
-          If you have questions, please text us anytime.
-        </div>
-      </form>
-    </main>
+      </div>
+    </div>
   </div>
 
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="heroGrid">
+        <div class="heroCard">
+          <h1 class="names">Dat Hoang Bao Dinh<br>&amp;<br>Huong Thi Thu Nguyen</h1>
+          <p class="subline">Request the honor of your presence</p>
+
+          <div class="pillRow">
+            <div class="pill">📅 <span id="heroDate">August 1st, 2026</span></div>
+            <div class="pill">📍 <span id="heroCity">Atlanta, GA</span></div>
+            <a class="pill" href="#rsvp" style="text-decoration:none;">💌 RSVP</a>
+          </div>
+        </div>
+
+        <div class="sideCard">
+          <div class="sideTitle">Countdown</div>
+          <div class="countGrid">
+            <div class="countBox"><p class="countNum" id="d">—</p><p class="countLbl">Days</p></div>
+            <div class="countBox"><p class="countNum" id="h">—</p><p class="countLbl">Hours</p></div>
+            <div class="countBox"><p class="countNum" id="m">—</p><p class="countLbl">Minutes</p></div>
+            <div class="countBox"><p class="countNum" id="s">—</p><p class="countLbl">Seconds</p></div>
+          </div>
+          <p class="hint" id="deadlineHint">Kindly reply by <strong>July 1st, 2026</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details -->
+  <section id="details" class="section">
+    <div class="container">
+      <div class="kicker">Wedding Details</div>
+      <h2>When & Where</h2>
+      <p class="lead">
+        Everything you need in one place — date, venue, ceremony/reception timing, and directions.
+        You can also RSVP and upload photos to share with everyone.
+      </p>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="row">
+            <div class="icon">📍</div>
+            <div>
+              <h3>Venue</h3>
+              <p class="meta">
+                <strong id="venueName">[Venue Name]</strong><br>
+                <span id="venueAddr">[Street Address, City, State ZIP]</span>
+              </p>
+              <div class="btnRow">
+                <a class="btn primary" id="mapsBtn" target="_blank" rel="noopener">Open in Google Maps</a>
+                <a class="btn" href="#schedule">View Schedule</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div class="icon">🗺️</div>
+            <div>
+              <h3>Map</h3>
+              <p class="meta">Embedded map (optional). If you don’t want to embed, just keep the button above.</p>
+
+              <!-- OPTIONAL: Google Maps embed -->
+              <div style="margin-top:12px; border-radius:16px; overflow:hidden; border:1px solid rgba(122,31,43,.12);">
+                <iframe
+                  id="mapIframe"
+                  title="Google Map"
+                  width="100%"
+                  height="240"
+                  style="border:0; display:block;"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="">
+                </iframe>
+              </div>
+
+              <p class="meta" style="margin-top:10px;">
+                Tip: If you don’t have an embed link, just leave it blank and the map box will auto-hide.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section id="schedule" class="section">
+    <div class="container">
+      <div class="kicker">Timeline</div>
+      <h2>Ceremony & Reception</h2>
+      <p class="lead">Please arrive a bit early so we can start on time.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="row">
+            <div class="icon">⛪</div>
+            <div>
+              <h3>Ceremony</h3>
+              <p class="meta">
+                <strong id="ceremonyTime">[Time]</strong><br>
+                <span id="ceremonyNote">[Optional note: dress code / seating / parking]</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row">
+            <div class="icon">🥂</div>
+            <div>
+              <h3>Reception</h3>
+              <p class="meta">
+                <strong id="receptionTime">[Time]</strong><br>
+                <span id="receptionNote">[Optional note: dinner / dancing / program]</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section id="rsvp" class="section">
+    <div class="container">
+      <div class="kicker">RSVP</div>
+      <h2>Please respond</h2>
+      <p class="lead">Your response helps us plan seating and catering accurately.</p>
+
+      <div class="card" style="margin-top:18px;">
+        <form id="rsvpForm" novalidate>
+          <div class="formGrid">
+            <div>
+              <label for="name">Full Name *</label>
+              <input id="name" name="name" required placeholder="Your name" autocomplete="name" />
+            </div>
+            <div>
+              <label for="contact">Email or Phone</label>
+              <input id="contact" name="contact" placeholder="Email or phone" autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="formGrid" style="margin-top:12px;">
+            <div>
+              <label for="status">Will you be attending? *</label>
+              <select id="status" name="status" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="Attending">Attending</option>
+                <option value="Not attending">Not attending</option>
+              </select>
+            </div>
+
+            <div id="attendingField" class="hidden">
+              <label for="guests">Number of People Attending *</label>
+              <select id="guests" name="guests">
+                <option value="" disabled selected>Select number</option>
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="attendingExtras" class="hidden" style="margin-top:12px;">
+            <div class="formGrid">
+              <div>
+                <label for="meal">Dietary Restrictions</label>
+                <input id="meal" name="meal" placeholder="Vegetarian, allergies, etc." />
+              </div>
+              <div>
+                <label for="song">Song Request</label>
+                <input id="song" name="song" placeholder="Optional" />
+              </div>
+            </div>
+
+            <div style="margin-top:12px;">
+              <label for="note">Message for the Couple</label>
+              <textarea id="note" name="note" placeholder="Anything you'd like us to know?"></textarea>
+            </div>
+          </div>
+
+          <button id="submitBtn" class="submitBtn" type="submit">Submit RSVP</button>
+          <div id="toast" class="toast hidden"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photos -->
+  <section id="photos" class="section">
+    <div class="container">
+      <div class="kicker">Memories</div>
+      <h2>Share your photos</h2>
+      <p class="lead">
+        We want to see the wedding from everyone’s point of view — candid moments, group shots, and fun angles.
+        Upload to the shared album and everyone can enjoy the gallery.
+      </p>
+
+      <div class="galleryGrid">
+        <div class="phCard">
+          <p class="phTitle">Upload Photos</p>
+          <p class="phText">Tap the button to add photos/videos to our shared album.</p>
+          <div class="btnRow">
+            <a class="btn primary" id="uploadAlbumBtn" target="_blank" rel="noopener">Upload to Album</a>
+          </div>
+        </div>
+
+        <div class="phCard">
+          <p class="phTitle">View Gallery</p>
+          <p class="phText">See photos uploaded by guests (best on phone).</p>
+          <div class="btnRow">
+            <a class="btn" id="viewAlbumBtn" target="_blank" rel="noopener">Open Gallery</a>
+          </div>
+        </div>
+
+        <div class="phCard">
+          <p class="phTitle">Tips</p>
+          <p class="phText">
+            Turn on flash if needed, and upload your favorites anytime after the event.
+            Please avoid posting sensitive/private photos.
+          </p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <div class="row">
+          <div class="icon">✅</div>
+          <div>
+            <h3>Why we use a shared album</h3>
+            <p class="meta">
+              GitHub Pages can’t receive uploads directly (no backend). A shared album is the simplest
+              “wedding-proof” method: guests upload from their phones, and everyone can view in one place.
+              If you want a fully embedded gallery on this page, we can upgrade to Cloudinary/Firebase later.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>Dat Hoang Bao Dinh & Huong Thi Thu Nguyen • <span id="footDate">August 1, 2026</span></div>
+        <div>Made with ❤️ in burgundy & baby pink</div>
+      </div>
+    </div>
+  </footer>
+
 <script>
-/**
- * =========================================================
- * GOOGLE FORMS CONFIG (Required)
- * =========================================================
- * 1) In your Google Form, click "Send" -> <> (Embed HTML)
- * 2) Find the action URL: .../formResponse
- * 3) Replace FORM_URL below
- * 4) Replace each entry.xxxxxx with your form's real entry IDs
- */
+/* =========================================================
+   EDIT THESE (site configuration)
+   ========================================================= */
+
+// Names
+const COUPLE = {
+  groom: "Dat Hoang Bao Dinh",
+  bride: "Huong Thi Thu Nguyen"
+};
+
+// Wedding Date (local time)
+const WEDDING_DATE_ISO = "2026-08-01T16:00:00-04:00"; // <-- change time + timezone if needed
+
+// RSVP deadline display (text only)
+const RSVP_DEADLINE_TEXT = "July 1st, 2026";
+
+// Location
+const VENUE = {
+  name: "[Venue Name]",
+  address: "[Street Address, City, State ZIP]",
+  // Google Maps link (share link)
+  mapsUrl: "https://www.google.com/maps?q=Atlanta,GA",
+  // Optional: embed URL (Google Maps -> Share -> Embed map -> src)
+  mapsEmbedUrl: "" // leave blank to auto-hide the embed box
+};
+
+// Schedule
+const SCHEDULE = {
+  ceremonyTime: "[Ceremony time — e.g., 4:00 PM]",
+  ceremonyNote: "[Optional note: arrive 15 minutes early]",
+  receptionTime: "[Reception time — e.g., 6:00 PM]",
+  receptionNote: "[Optional note: dinner & dancing]"
+};
+
+// Photo album (Recommended: Google Photos shared album)
+const PHOTO_ALBUM = {
+  uploadUrl: "PASTE_SHARED_ALBUM_CONTRIBUTE_LINK_HERE",
+  viewUrl: "PASTE_SHARED_ALBUM_VIEW_LINK_HERE"
+};
+
+/* =========================================================
+   Google Forms backend for RSVP (required to save responses)
+   ========================================================= */
 const FORM_URL = "PASTE_YOUR_GOOGLE_FORM_formResponse_URL_HERE";
 
 const MAP = {
-  name:   "entry.111111111111", // Full Name
-  contact:"entry.222222222222", // Email/Phone
-  status: "entry.333333333333", // RSVP Status
-  guests: "entry.444444444444", // Number of People Attending
-  meal:   "entry.555555555555", // Dietary Restrictions
-  note:   "entry.666666666666"  // Message
+  name:   "entry.111111111111",
+  contact:"entry.222222222222",
+  status: "entry.333333333333",
+  guests: "entry.444444444444",
+  meal:   "entry.555555555555",
+  note:   "entry.666666666666",
+  song:   "entry.777777777777"
 };
 
+/* =========================================================
+   Apply configuration to UI
+   ========================================================= */
+document.getElementById("navDate").textContent = formatDateShort(new Date(WEDDING_DATE_ISO));
+document.getElementById("heroDate").textContent = formatDateLong(new Date(WEDDING_DATE_ISO));
+document.getElementById("footDate").textContent = formatDateShort(new Date(WEDDING_DATE_ISO));
+document.getElementById("deadlineHint").innerHTML = `Kindly reply by <strong>${RSVP_DEADLINE_TEXT}</strong>.`;
+
+document.getElementById("venueName").textContent = VENUE.name;
+document.getElementById("venueAddr").textContent = VENUE.address;
+document.getElementById("mapsBtn").href = VENUE.mapsUrl;
+
+const iframe = document.getElementById("mapIframe");
+if (VENUE.mapsEmbedUrl && VENUE.mapsEmbedUrl.trim().length > 0) {
+  iframe.src = VENUE.mapsEmbedUrl;
+} else {
+  // hide the whole map card iframe container if no embed
+  iframe.parentElement.style.display = "none";
+}
+
+document.getElementById("ceremonyTime").textContent = SCHEDULE.ceremonyTime;
+document.getElementById("ceremonyNote").textContent = SCHEDULE.ceremonyNote;
+document.getElementById("receptionTime").textContent = SCHEDULE.receptionTime;
+document.getElementById("receptionNote").textContent = SCHEDULE.receptionNote;
+
+const uploadBtn = document.getElementById("uploadAlbumBtn");
+const viewBtn = document.getElementById("viewAlbumBtn");
+uploadBtn.href = PHOTO_ALBUM.uploadUrl;
+viewBtn.href = PHOTO_ALBUM.viewUrl;
+
+/* =========================================================
+   Countdown
+   ========================================================= */
+const target = new Date(WEDDING_DATE_ISO).getTime();
+const $d = document.getElementById("d");
+const $h = document.getElementById("h");
+const $m = document.getElementById("m");
+const $s = document.getElementById("s");
+
+function tick(){
+  const now = Date.now();
+  let diff = Math.max(0, target - now);
+
+  const days = Math.floor(diff / (1000*60*60*24)); diff -= days*(1000*60*60*24);
+  const hrs  = Math.floor(diff / (1000*60*60));    diff -= hrs*(1000*60*60);
+  const mins = Math.floor(diff / (1000*60));       diff -= mins*(1000*60);
+  const secs = Math.floor(diff / 1000);
+
+  $d.textContent = days;
+  $h.textContent = String(hrs).padStart(2,"0");
+  $m.textContent = String(mins).padStart(2,"0");
+  $s.textContent = String(secs).padStart(2,"0");
+}
+tick();
+setInterval(tick, 1000);
+
+/* =========================================================
+   RSVP form behavior + submit to Google Forms
+   ========================================================= */
 const form = document.getElementById("rsvpForm");
 const statusEl = document.getElementById("status");
-const attendingBlock = document.getElementById("attendingBlock");
+const attendingField = document.getElementById("attendingField");
+const attendingExtras = document.getElementById("attendingExtras");
 const guestsEl = document.getElementById("guests");
 const toastEl = document.getElementById("toast");
 const submitBtn = document.getElementById("submitBtn");
 
-function showToast(message, kind) {
-  toastEl.textContent = message;
-  toastEl.classList.remove("hidden", "ok", "err");
+function showToast(msg, kind){
+  toastEl.textContent = msg;
+  toastEl.classList.remove("hidden","ok","err");
   toastEl.classList.add(kind === "ok" ? "ok" : "err");
 }
-
-function hideToast() {
-  toastEl.textContent = "";
+function hideToast(){
   toastEl.classList.add("hidden");
-  toastEl.classList.remove("ok", "err");
+  toastEl.textContent = "";
+  toastEl.classList.remove("ok","err");
 }
 
-function setAttendingUI() {
+function syncAttendingUI(){
   const attending = statusEl.value === "Attending";
-  attendingBlock.classList.toggle("hidden", !attending);
-
-  // Required only if attending
+  attendingField.classList.toggle("hidden", !attending);
+  attendingExtras.classList.toggle("hidden", !attending);
   guestsEl.required = attending;
 
-  // When switching to "Not attending", clear attending-only fields
-  if (!attending) {
+  if (!attending){
     guestsEl.value = "";
     document.getElementById("meal").value = "";
     document.getElementById("note").value = "";
+    document.getElementById("song").value = "";
   }
 }
-
-statusEl.addEventListener("change", () => {
-  hideToast();
-  setAttendingUI();
-});
-
-// Initial state (in case browser restores form state)
-setAttendingUI();
+statusEl.addEventListener("change", () => { hideToast(); syncAttendingUI(); });
+syncAttendingUI();
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   hideToast();
 
-  // Basic configuration sanity check
   if (!FORM_URL.includes("docs.google.com/forms") || FORM_URL.includes("PASTE_")) {
-    showToast("Site not configured yet: please add your Google Form formResponse URL.", "err");
+    showToast("RSVP backend not configured yet: please paste your Google Form formResponse URL + entry IDs.", "err");
     return;
   }
 
-  // Built-in validation UI (friendly toast)
-  if (!form.checkValidity()) {
-    // Trigger browser to mark missing fields (mobile-friendly)
+  if (!form.checkValidity()){
     form.reportValidity();
     showToast("Please complete the required fields.", "err");
     return;
@@ -315,7 +827,7 @@ form.addEventListener("submit", async (e) => {
   submitBtn.disabled = true;
   submitBtn.textContent = "Submitting...";
 
-  try {
+  try{
     const data = new FormData(form);
     const attending = data.get("status") === "Attending";
 
@@ -324,37 +836,51 @@ form.addEventListener("submit", async (e) => {
     payload.append(MAP.contact, data.get("contact") || "");
     payload.append(MAP.status, data.get("status") || "");
 
-    // Only send attending-only fields if attending
-    if (attending) {
+    if (attending){
       payload.append(MAP.guests, data.get("guests") || "");
       payload.append(MAP.meal, data.get("meal") || "");
       payload.append(MAP.note, data.get("note") || "");
+      payload.append(MAP.song, data.get("song") || "");
     } else {
       payload.append(MAP.guests, "");
       payload.append(MAP.meal, "");
       payload.append(MAP.note, "");
+      payload.append(MAP.song, "");
     }
 
-    // Google Forms needs no-cors for static sites
     await fetch(FORM_URL, {
-      method: "POST",
-      mode: "no-cors",
+      method:"POST",
+      mode:"no-cors",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: payload
     });
 
     showToast("Thank you! Your RSVP has been received.", "ok");
     form.reset();
-    setAttendingUI();
-
-  } catch (err) {
+    syncAttendingUI();
+  } catch(err){
     showToast("Something went wrong. Please try again, or contact us directly.", "err");
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = "Submit RSVP";
   }
 });
-</script>
 
+/* =========================================================
+   Helpers
+   ========================================================= */
+function formatDateShort(d){
+  return d.toLocaleDateString(undefined, { year:"numeric", month:"long", day:"numeric" });
+}
+function formatDateLong(d){
+  // "August 1st, 2026" style (simple)
+  const day = d.getDate();
+  const suffix = (day % 10 === 1 && day !== 11) ? "st"
+               : (day % 10 === 2 && day !== 12) ? "nd"
+               : (day % 10 === 3 && day !== 13) ? "rd" : "th";
+  const month = d.toLocaleDateString(undefined, { month:"long" });
+  return `${month} ${day}${suffix}, ${d.getFullYear()}`;
+}
+</script>
 </body>
 </html>
