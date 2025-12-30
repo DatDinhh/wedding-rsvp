@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dat & Huong — Wedding RSVP</title>
+
+<style>
+:root{
+  --burgundy:#7A1F2B;
+  --pink:#F4C2CC;
+  --white:#FFF9F9;
+  --ink:#3b1f23;
+  --muted:#7a4a50;
+  --line:#e6cfd3;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family: "Georgia", "Times New Roman", serif;
+  background:
+    radial-gradient(1000px 600px at top, #fbe6ea, transparent),
+    var(--white);
+  color:var(--ink);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+
+.card{
+  width:min(760px,100%);
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.15);
+  overflow:hidden;
+  border:3px solid var(--pink);
+}
+
+header{
+  background:linear-gradient(135deg,var(--burgundy),#5f1620);
+  color:#fff;
+  text-align:center;
+  padding:34px 22px;
+}
+
+header h1{
+  margin:0;
+  font-size:30px;
+  letter-spacing:.4px;
+  line-height:1.2;
+}
+
+header p{
+  margin:12px 0 0;
+  font-size:15px;
+  opacity:.95;
+  line-height:1.45;
+}
+
+main{
+  padding:28px 26px 30px;
+}
+
+.label{
+  display:block;
+  font-size:13px;
+  margin:0 0 6px;
+  color:var(--muted);
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-family:inherit;
+  font-size:15px;
+  color:var(--ink);
+}
+
+input::placeholder, textarea::placeholder{color:#b08a90}
+
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--burgundy);
+  box-shadow:0 0 0 2px rgba(122,31,43,.15);
+}
+
+textarea{min-height:110px; resize:vertical}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+@media(max-width:640px){
+  .grid{grid-template-columns:1fr}
+}
+
+.section{margin-top:16px}
+
+.hidden{display:none !important}
+
+button{
+  margin-top:22px;
+  width:100%;
+  padding:14px;
+  font-size:16px;
+  border-radius:14px;
+  border:none;
+  background:var(--burgundy);
+  color:#fff;
+  font-family:inherit;
+  font-weight:600;
+  cursor:pointer;
+}
+
+button:disabled{opacity:.6; cursor:not-allowed}
+
+.fine{
+  margin-top:14px;
+  font-size:13px;
+  color:var(--muted);
+  text-align:center;
+  line-height:1.5;
+}
+
+.toast{
+  margin-top:16px;
+  padding:12px 12px;
+  border-radius:12px;
+  font-size:14px;
+  text-align:center;
+  border:1px solid var(--line);
+}
+
+.toast.hidden{display:none}
+
+.toast.ok{background:#e9f6ef; border-color:#bfe7d2; color:#1e6b47}
+.toast.err{background:#fdecec; border-color:#f2bcbc; color:#8b1e2a}
+
+hr{
+  border:0;
+  border-top:1px solid #f1dde1;
+  margin:18px 0 0;
+}
+</style>
+</head>
+
+<body>
+  <div class="card">
+    <header>
+      <h1>
+        Dat Hoang Bao Dinh<br>
+        &amp;<br>
+        Huong Thi Thu Nguyen
+      </h1>
+      <p>
+        Request the honor of your presence<br>
+        <strong>August 1st, 2026</strong>
+      </p>
+    </header>
+
+    <main>
+      <form id="rsvpForm" novalidate>
+
+        <div class="grid">
+          <div>
+            <label class="label" for="name">Full Name *</label>
+            <input id="name" name="name" required autocomplete="name" placeholder="Jane Doe">
+          </div>
+          <div>
+            <label class="label" for="contact">Email or Phone</label>
+            <input id="contact" name="contact" autocomplete="email" placeholder="jane@email.com or (555) 555-5555">
+          </div>
+        </div>
+
+        <div class="section">
+          <label class="label" for="status">Will you be attending? *</label>
+          <select id="status" name="status" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="Attending">Attending</option>
+            <option value="Not attending">Not attending</option>
+          </select>
+        </div>
+
+        <!-- Attending-only details -->
+        <div id="attendingBlock" class="section hidden" aria-live="polite">
+          <div class="grid">
+            <div>
+              <label class="label" for="guests">Number of People Attending *</label>
+              <select id="guests" name="guests">
+                <option value="" disabled selected>Select number</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="meal">Dietary Restrictions</label>
+              <input id="meal" name="meal" placeholder="Vegetarian, allergies, etc.">
+            </div>
+          </div>
+
+          <div class="section">
+            <label class="label" for="note">Message for the Couple</label>
+            <textarea id="note" name="note" placeholder="Anything you'd like us to know?"></textarea>
+          </div>
+        </div>
+
+        <button id="submitBtn" type="submit">Submit RSVP</button>
+
+        <div id="toast" class="toast hidden"></div>
+
+        <hr>
+
+        <div class="fine">
+          Kindly reply by <strong>July 1st, 2026</strong>.
+          <br>
+          If you have questions, please text us anytime.
+        </div>
+      </form>
+    </main>
+  </div>
+
+<script>
+/**
+ * =========================================================
+ * GOOGLE FORMS CONFIG (Required)
+ * =========================================================
+ * 1) In your Google Form, click "Send" -> <> (Embed HTML)
+ * 2) Find the action URL: .../formResponse
+ * 3) Replace FORM_URL below
+ * 4) Replace each entry.xxxxxx with your form's real entry IDs
+ */
+const FORM_URL = "PASTE_YOUR_GOOGLE_FORM_formResponse_URL_HERE";
+
+const MAP = {
+  name:   "entry.111111111111", // Full Name
+  contact:"entry.222222222222", // Email/Phone
+  status: "entry.333333333333", // RSVP Status
+  guests: "entry.444444444444", // Number of People Attending
+  meal:   "entry.555555555555", // Dietary Restrictions
+  note:   "entry.666666666666"  // Message
+};
+
+const form = document.getElementById("rsvpForm");
+const statusEl = document.getElementById("status");
+const attendingBlock = document.getElementById("attendingBlock");
+const guestsEl = document.getElementById("guests");
+const toastEl = document.getElementById("toast");
+const submitBtn = document.getElementById("submitBtn");
+
+function showToast(message, kind) {
+  toastEl.textContent = message;
+  toastEl.classList.remove("hidden", "ok", "err");
+  toastEl.classList.add(kind === "ok" ? "ok" : "err");
+}
+
+function hideToast() {
+  toastEl.textContent = "";
+  toastEl.classList.add("hidden");
+  toastEl.classList.remove("ok", "err");
+}
+
+function setAttendingUI() {
+  const attending = statusEl.value === "Attending";
+  attendingBlock.classList.toggle("hidden", !attending);
+
+  // Required only if attending
+  guestsEl.required = attending;
+
+  // When switching to "Not attending", clear attending-only fields
+  if (!attending) {
+    guestsEl.value = "";
+    document.getElementById("meal").value = "";
+    document.getElementById("note").value = "";
+  }
+}
+
+statusEl.addEventListener("change", () => {
+  hideToast();
+  setAttendingUI();
+});
+
+// Initial state (in case browser restores form state)
+setAttendingUI();
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  hideToast();
+
+  // Basic configuration sanity check
+  if (!FORM_URL.includes("docs.google.com/forms") || FORM_URL.includes("PASTE_")) {
+    showToast("Site not configured yet: please add your Google Form formResponse URL.", "err");
+    return;
+  }
+
+  // Built-in validation UI (friendly toast)
+  if (!form.checkValidity()) {
+    // Trigger browser to mark missing fields (mobile-friendly)
+    form.reportValidity();
+    showToast("Please complete the required fields.", "err");
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+
+  try {
+    const data = new FormData(form);
+    const attending = data.get("status") === "Attending";
+
+    const payload = new URLSearchParams();
+    payload.append(MAP.name, data.get("name") || "");
+    payload.append(MAP.contact, data.get("contact") || "");
+    payload.append(MAP.status, data.get("status") || "");
+
+    // Only send attending-only fields if attending
+    if (attending) {
+      payload.append(MAP.guests, data.get("guests") || "");
+      payload.append(MAP.meal, data.get("meal") || "");
+      payload.append(MAP.note, data.get("note") || "");
+    } else {
+      payload.append(MAP.guests, "");
+      payload.append(MAP.meal, "");
+      payload.append(MAP.note, "");
+    }
+
+    // Google Forms needs no-cors for static sites
+    await fetch(FORM_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: payload
+    });
+
+    showToast("Thank you! Your RSVP has been received.", "ok");
+    form.reset();
+    setAttendingUI();
+
+  } catch (err) {
+    showToast("Something went wrong. Please try again, or contact us directly.", "err");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit RSVP";
+  }
+});
+</script>
+
+</body>
+</html>
