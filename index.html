@@ -558,8 +558,8 @@
               <input id="name" name="name" required placeholder="Your name" autocomplete="name" />
             </div>
             <div>
-              <label for="contact">Email or Phone</label>
-              <input id="contact" name="contact" placeholder="Email or phone" autocomplete="email" />
+              <label for="contact">Email or Phone *</label>
+              <input id="contact" name="contact" required placeholder="Email or phone" autocomplete="email" />
             </div>
           </div>
 
@@ -569,7 +569,7 @@
               <select id="status" name="status" required>
                 <option value="" disabled selected>Select one</option>
                 <option value="Attending">Attending</option>
-                <option value="Not attending">Not attending</option>
+                <option value="Not Attending">Not Attending</option>
               </select>
             </div>
 
@@ -627,14 +627,17 @@ const RSVP_DEADLINE_TEXT = "May 14, 2026";
 /* =========================================================
    Google Forms RSVP backend (Required to save responses)
    ========================================================= */
-const FORM_URL = "PASTE_YOUR_GOOGLE_FORM_formResponse_URL_HERE";
+const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeYDRA2o6FV2BLCBSihNr3ZRDzc6Wfd5AhAjQTU9J8O9BJAyA/formResponse";
 
 const MAP = {
-  name:   "entry.111111111111",
-  contact:"entry.222222222222",
-  status: "entry.333333333333",
-  guests: "entry.444444444444",
-  note:   "entry.555555555555"
+  name:   "entry.313898050",
+  contact:"entry.570218755",
+  status: "entry.968764563",
+  guests: "entry.1278407539",
+  // The pre-filled link you sent did not include the Message field.
+  // Leave this blank so the site does not submit to a fake entry ID.
+  // To save messages too, generate a new pre-filled link with TEST_NOTE and replace this value.
+  note:   ""
 };
 
 /* =========================================================
@@ -700,7 +703,7 @@ function hideToast(){
 function syncAttendingUI(){
   const attending = statusEl.value === "Attending";
   attendingField.classList.toggle("hidden", !attending);
-  attendingExtras.classList.toggle("hidden", !attending);
+  attendingExtras.classList.toggle("hidden", !(attending && MAP.note));
   guestsEl.required = attending;
 
   if (!attending){
@@ -740,10 +743,10 @@ form.addEventListener("submit", async (e) => {
 
     if (attending){
       payload.append(MAP.guests, data.get("guests") || "");
-      payload.append(MAP.note, data.get("note") || "");
+      if (MAP.note) payload.append(MAP.note, data.get("note") || "");
     } else {
       payload.append(MAP.guests, "");
-      payload.append(MAP.note, "");
+      if (MAP.note) payload.append(MAP.note, "");
     }
 
     await fetch(FORM_URL, {
