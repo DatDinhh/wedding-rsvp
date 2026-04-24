@@ -41,7 +41,6 @@
     .section{padding:64px 0;}
     @media (max-width:720px){ .section{padding:52px 0;} }
 
-    /* Top bar */
     .topbar{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(10px);
@@ -86,7 +85,6 @@
     }
     .cta:hover{opacity:.92}
 
-    /* Hero */
     .hero{padding:56px 0 24px;}
     .heroGrid{
       display:grid;
@@ -156,7 +154,6 @@
     }
     .pill:hover{opacity:.94}
 
-    /* Side card */
     .sideCard{
       background: rgba(255,255,255,.92);
       border-radius: var(--radius);
@@ -215,7 +212,6 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
-    /* Headings */
     h2{
       margin:10px 0 10px;
       font-size:30px;
@@ -231,7 +227,6 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
-    /* Cards */
     .grid2{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -292,7 +287,6 @@
     }
     .btn:hover{opacity:.93}
 
-    /* RSVP */
     form{margin-top:14px}
     .formGrid{
       display:grid;
@@ -358,7 +352,6 @@
     .toast.ok{background:#e9f6ef; border-color:#bfe7d2; color:#1e6b47}
     .toast.err{background:#fdecec; border-color:#f2bcbc; color:#8b1e2a}
 
-    /* Footer */
     footer{
       padding:28px 0 46px;
       border-top:1px solid rgba(107,15,23,.10);
@@ -390,7 +383,6 @@
     </div>
   </div>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <div class="heroGrid">
@@ -435,7 +427,6 @@
     </div>
   </section>
 
-  <!-- DETAILS -->
   <section id="details" class="section">
     <div class="container">
       <div class="kicker">When & Where</div>
@@ -491,7 +482,6 @@
     </div>
   </section>
 
-  <!-- PROGRAM -->
   <section id="program" class="section">
     <div class="container">
       <div class="kicker">Wedding Program</div>
@@ -543,7 +533,6 @@
     </div>
   </section>
 
-  <!-- RSVP -->
   <section id="rsvp" class="section">
     <div class="container">
       <div class="kicker">RSVP</div>
@@ -602,6 +591,14 @@
           </div>
 
           <div id="attendingExtras" class="hidden" style="margin-top:12px;">
+            <div id="additionalGuestsWrap" class="hidden" style="margin-bottom:12px;">
+              <label>Additional Guest Full Names *</label>
+              <p class="hint" style="margin:0 0 10px;">
+                If your RSVP includes 2 or more people, please enter the full name of each additional guest.
+              </p>
+              <div id="additionalGuestFields" class="formGrid"></div>
+            </div>
+
             <div>
               <label for="note">Message for the Couple</label>
               <textarea id="note" name="note" placeholder="Anything you'd like us to know?"></textarea>
@@ -637,13 +634,12 @@ const COUPLE = {
   bride: "Huong Thi Thu Nguyen"
 };
 
-// Wedding date/time for countdown (timezone matters). Georgia is usually -04:00 in summer.
-const WEDDING_DATE_ISO = "2026-08-01T14:00:00-04:00"; // start countdown to Mass time
+const WEDDING_DATE_ISO = "2026-08-01T14:00:00-04:00";
 
 const RSVP_DEADLINE_TEXT = "May 14, 2026";
 
 /* =========================================================
-   Google Forms RSVP backend (Required to save responses)
+   Google Forms RSVP backend
    ========================================================= */
 const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeYDRA2o6FV2BLCBSihNr3ZRDzc6Wfd5AhAjQTU9J8O9BJAyA/formResponse";
 
@@ -652,6 +648,7 @@ const MAP = {
   contact:"entry.570218755",
   status: "entry.968764563",
   guests: "entry.1278407539",
+  additionalGuests: "entry.570536834",
   note:   "entry.1870949106"
 };
 
@@ -701,6 +698,8 @@ const statusEl = document.getElementById("status");
 const attendingField = document.getElementById("attendingField");
 const attendingExtras = document.getElementById("attendingExtras");
 const guestsEl = document.getElementById("guests");
+const additionalGuestsWrap = document.getElementById("additionalGuestsWrap");
+const additionalGuestFields = document.getElementById("additionalGuestFields");
 const toastEl = document.getElementById("toast");
 const submitBtn = document.getElementById("submitBtn");
 
@@ -709,10 +708,70 @@ function showToast(msg, kind){
   toastEl.classList.remove("hidden","ok","err");
   toastEl.classList.add(kind === "ok" ? "ok" : "err");
 }
+
 function hideToast(){
   toastEl.classList.add("hidden");
   toastEl.textContent = "";
   toastEl.classList.remove("ok","err");
+}
+
+function isConfiguredEntryId(entryId){
+  return /^entry\.\d+$/.test(entryId || "");
+}
+
+function syncGuestNamesUI(){
+  const attending = statusEl.value === "Attending";
+  const guestCount = Number(guestsEl.value || 0);
+
+  const oldValues = {};
+  additionalGuestFields.querySelectorAll("input").forEach((input) => {
+    oldValues[input.id] = input.value;
+  });
+
+  additionalGuestFields.innerHTML = "";
+
+  if (!attending || guestCount <= 1){
+    additionalGuestsWrap.classList.add("hidden");
+    return;
+  }
+
+  additionalGuestsWrap.classList.remove("hidden");
+
+  for (let i = 2; i <= guestCount; i++){
+    const field = document.createElement("div");
+
+    const label = document.createElement("label");
+    label.setAttribute("for", `guestName${i}`);
+    label.textContent = `Guest ${i} Full Name *`;
+
+    const input = document.createElement("input");
+    input.id = `guestName${i}`;
+    input.name = `guestName${i}`;
+    input.className = "additionalGuestName";
+    input.required = true;
+    input.placeholder = `Guest ${i} full name`;
+    input.autocomplete = "name";
+    input.value = oldValues[input.id] || "";
+
+    field.appendChild(label);
+    field.appendChild(input);
+    additionalGuestFields.appendChild(field);
+  }
+}
+
+function getAdditionalGuestNames(){
+  const attending = statusEl.value === "Attending";
+  const guestCount = Number(guestsEl.value || 0);
+
+  if (!attending || guestCount <= 1) return "";
+
+  const names = [];
+  for (let i = 2; i <= guestCount; i++){
+    const input = document.getElementById(`guestName${i}`);
+    const value = input ? input.value.trim() : "";
+    if (value) names.push(`Guest ${i}: ${value}`);
+  }
+  return names.join("\n");
 }
 
 function syncAttendingUI(){
@@ -723,10 +782,24 @@ function syncAttendingUI(){
 
   if (!attending){
     guestsEl.value = "";
+    additionalGuestFields.innerHTML = "";
+    additionalGuestsWrap.classList.add("hidden");
     document.getElementById("note").value = "";
   }
+
+  syncGuestNamesUI();
 }
-statusEl.addEventListener("change", () => { hideToast(); syncAttendingUI(); });
+
+statusEl.addEventListener("change", () => {
+  hideToast();
+  syncAttendingUI();
+});
+
+guestsEl.addEventListener("change", () => {
+  hideToast();
+  syncGuestNamesUI();
+});
+
 syncAttendingUI();
 
 form.addEventListener("submit", async (e) => {
@@ -744,12 +817,20 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
+  const needsAdditionalGuestNames = statusEl.value === "Attending" && Number(guestsEl.value || 0) > 1;
+  if (needsAdditionalGuestNames && !isConfiguredEntryId(MAP.additionalGuests)){
+    showToast("RSVP backend not configured yet: add the Google Form field for additional guest names and paste its entry ID.", "err");
+    return;
+  }
+
   submitBtn.disabled = true;
   submitBtn.textContent = "Submitting...";
 
   try{
     const data = new FormData(form);
     const attending = data.get("status") === "Attending";
+    const guestCount = Number(data.get("guests") || 0);
+    const additionalGuestNames = getAdditionalGuestNames();
 
     const payload = new URLSearchParams();
     payload.append(MAP.name, data.get("name") || "");
@@ -758,9 +839,19 @@ form.addEventListener("submit", async (e) => {
 
     if (attending){
       payload.append(MAP.guests, data.get("guests") || "");
+
+      if (isConfiguredEntryId(MAP.additionalGuests)){
+        payload.append(MAP.additionalGuests, guestCount > 1 ? additionalGuestNames : "");
+      }
+
       payload.append(MAP.note, data.get("note") || "");
     } else {
       payload.append(MAP.guests, "");
+
+      if (isConfiguredEntryId(MAP.additionalGuests)){
+        payload.append(MAP.additionalGuests, "");
+      }
+
       payload.append(MAP.note, "");
     }
 
